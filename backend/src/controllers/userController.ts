@@ -9,7 +9,6 @@ export class UserController implements IUserController {
 
   async register(req: Request, res: Response) {
     try {
-      console.log("reached here")
       const user = await this.userService.register(req.body);
       if(!user._id){
         throw new Error("Something went wrong")

@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyAccessToken } from '../config/jwt';
 import { response } from '../utils/response';
-import { JwtPayload } from 'jsonwebtoken';
 export interface DecodedToken {
   userId: string;
   iat?: number;

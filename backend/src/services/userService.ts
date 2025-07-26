@@ -18,8 +18,9 @@ export class UserService implements IUserService {
 
   async login(credentials: { email: string; password: string }): Promise<IUser> {
     const user = await this.userRepository.findByEmail(credentials.email);
-    if (!user) throw new Error('Invalid credentials');
+    if (!user) throw new Error('No User Exist');
     const isValid = await bcrypt.compare(credentials.password, user.password);
+    console.log(isValid)
     if (!isValid) throw new Error('Invalid credentials');
     return user;
   }
@@ -27,7 +28,7 @@ export class UserService implements IUserService {
   async refreshToken(refreshToken: string): Promise<IUser> {
     try {
       const decoded = verifyRefreshToken(refreshToken) as { userId: string };
-      const user = await this.userRepository.findByEmail((await this.userRepository.findByEmail(''))?.email || '');
+      const user = await this.userRepository.findById(decoded.userId)
       if (!user) throw new Error('User not found');
       return user;
     } catch (error) {

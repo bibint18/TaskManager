@@ -1,13 +1,12 @@
 import { Request, Response } from 'express';
 import { ITaskService } from '../interfaces/service.interface';
 import { response } from '../utils/response';
+import { ITaskController } from '../interfaces/controller.interface';
 
-export class TaskController {
+export class TaskController implements ITaskController {
   constructor(private taskService: ITaskService) {}
-
   async getAllTasks(req: Request, res: Response) {
     try {
-      console.log("UserId", req.user?.userId)
       const userId = req.user?.userId as string
       const tasks = await this.taskService.getAllTasks(userId);
       return response(res, 200, 'Tasks retrieved successfully', tasks);

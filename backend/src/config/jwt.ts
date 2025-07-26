@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { DecodedToken } from '../middleware/auth'
 
 export const generateAccessToken = (userId:string) => {
-  return jwt.sign({userId},process.env.JWT_ACCESS_SECRET as string,{expiresIn:'10min'})
+  return jwt.sign({userId},process.env.JWT_ACCESS_SECRET as string,{expiresIn:'1min'})
 }
 
 export const generateRefreshToken =(userId:string) => {
