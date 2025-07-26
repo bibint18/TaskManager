@@ -22,7 +22,7 @@ const TaskForm: React.FC<{ task?: ITask }> = ({ task }) => {
       } else {
         await createTask({ title, description, due_date: dueDate, status: 'pending' });
       }
-      navigate('/tasks');
+      navigate('/');
     } catch (err: any) {
       setError(err.message || 'Failed to save task');
       toast.error(err.message || 'Failed to save task');

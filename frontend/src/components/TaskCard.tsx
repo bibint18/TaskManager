@@ -22,18 +22,38 @@ const TaskCard: React.FC<{ task: ITask }> = ({ task }) => {
   };
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this task?')) {
-      setLoading(true);
-      try {
-        await deleteTask(task._id!);
-        window.location.reload();
-      } catch (err: any) {
-        toast.error(err.message || 'Failed to delete task');
-      } finally {
-        setLoading(false);
-      }
+  const Swal = (await import('sweetalert2')).default;
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to delete this task?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel',
+    buttonsStyling: false,
+    customClass: {
+      popup: 'bg-white rounded-lg shadow-lg p-6',
+      title: 'text-xl font-bold text-gray-800',
+      htmlContainer: 'text-gray-600 mb-4',
+      confirmButton:
+        'bg-red-500 text-white font-medium px-4 py-2 rounded-md hover:bg-red-600 transition-colors mr-2',
+      cancelButton:
+        'bg-gray-300 text-gray-800 font-medium px-4 py-2 rounded-md hover:bg-gray-400 transition-colors',
+    },
+  });
+
+  if (result.isConfirmed) {
+    setLoading(true);
+    try {
+      await deleteTask(task._id!);
+      window.location.reload();
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || 'Failed to delete task');
+    } finally {
+      setLoading(false);
     }
-  };
+  }
+};
 
   return (
     <div
