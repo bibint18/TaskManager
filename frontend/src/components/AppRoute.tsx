@@ -4,9 +4,9 @@ import { Routes, Route} from 'react-router-dom';
 
 const LoginPage = lazy(() => import('../Pages/LoginPage'));
 const RegisterPage = lazy(() => import('../Pages/RegisterPage'));
-// const TaskListPage = lazy(() => import('../pages/TaskListPage'));
-// const AddTaskPage = lazy(() => import('../pages/AddTaskPage'));
-// const EditTaskPage = lazy(() => import('../pages/EditTaskPage'));
+const TaskListPage = lazy(() => import('../Pages/TaskListPage'));
+const AddTaskPage = lazy(() => import('../Pages/AddTaskPage'));
+const EditTaskPage = lazy(() => import('../Pages/EditTaskPage'));
 
 const AppRoutes: React.FC = () => {
   // const isAuthenticated = useAppSelector((state) => state.user.isAuthenticated);
@@ -15,9 +15,9 @@ const AppRoutes: React.FC = () => {
     <Routes>
       <Route path="/login" element={ <LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      {/* <Route path="/tasks" element={isAuthenticated ? <TaskListPage /> : <Navigate to="/login" />} />
-      <Route path="/add-task" element={isAuthenticated ? <AddTaskPage /> : <Navigate to="/login" />} />
-      <Route path="/edit-task/:id" element={isAuthenticated ? <EditTaskPage /> : <Navigate to="/login" />} /> */}
+       <Route path="/tasks" element={<TaskListPage/>} />
+      <Route path="/add-task" element={<AddTaskPage />} />
+      <Route path="/edit-task/:id" element={<EditTaskPage />} /> 
       {/* <Route path="/" element={<Navigate to={isAuthenticated ? "/tasks" : "/login"} />} /> */}
     </Routes>
   );

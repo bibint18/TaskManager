@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-// import taskRoutes from './routes/taskRoutes';
+import taskRoutes from './routes/taskRoutes';
 import authRoutes from './routes/authRoutes'
 import { errorHandler } from './middleware/error';
 import { ConnectDb } from './config/db'
@@ -19,7 +19,7 @@ app.use(
   })
 );
 app.use(express.json());
-// app.use('/api/tasks', taskRoutes);
+app.use('/api/tasks', taskRoutes);
 app.use('/api/auth', authRoutes);
 app.use(errorHandler);
 

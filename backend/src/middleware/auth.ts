@@ -1,7 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyAccessToken } from '../config/jwt';
 import { response } from '../utils/response';
+import { JwtPayload } from 'jsonwebtoken';
+export interface DecodedToken {
+  userId: string;
+  iat?: number;
+  exp?: number;
+}
 
+declare global {
+  namespace Express {
+    interface Request {
+  user?: DecodedToken;
+}
+  }
+}
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
@@ -9,6 +22,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
   }
   try {
     const decoded = verifyAccessToken(token);
+    console.log("decoded, ",decoded)
     req.user = decoded;
     next();
   } catch (error) {
