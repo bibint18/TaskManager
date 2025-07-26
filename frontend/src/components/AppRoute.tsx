@@ -13,7 +13,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/login" element={ <LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route element={<ProtectedRoute/>}>
-        <Route path="/tasks" element={<TaskListPage/>} />
+        <Route path="/" element={<TaskListPage/>} />
       <Route path="/add-task" element={<AddTaskPage />} />
       <Route path="/edit-task/:id" element={<EditTaskPage />} /> 
       </Route>

@@ -18,7 +18,7 @@ const LoginForm: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/tasks');
+      navigate('/');
     }
   }, [isAuthenticated, navigate]);
 
@@ -48,7 +48,7 @@ const LoginForm: React.FC = () => {
     try {
       const { accessToken, refreshToken } = await login({ email, password });
       dispatch(loginTheUser({ userId: 'user_id', name: 'User', email, accessToken, refreshToken }));
-      navigate('/tasks');
+      navigate('/');
     } catch (err: any) {
       console.log('LoginForm error:', {
         message: err.message,

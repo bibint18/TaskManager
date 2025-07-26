@@ -19,7 +19,7 @@ const RegisterForm: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/tasks');
+      navigate('/');
     }
   }, [isAuthenticated, navigate]);
 
@@ -58,7 +58,7 @@ const RegisterForm: React.FC = () => {
     try {
       const { accessToken, refreshToken } = await register({ email, password, name });
       dispatch(loginTheUser({ userId: 'user_id', name, email, accessToken, refreshToken }));
-      navigate('/tasks');
+      navigate('/');
     } catch (err: any) {
       console.log('RegisterForm error:', {
         message: err.message,
